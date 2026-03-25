@@ -1,0 +1,9 @@
+fastapi
+python-multipart
+uvicorn[standard]
+sqlalchemy[asyncio]
+aiosqlite
+pydantic-settings
+python-jose[cryptography]
+bcrypt
+cachetools
