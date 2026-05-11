@@ -34,3 +34,9 @@ def top_cache_get(key: tuple) -> list | None:
 
 def top_cache_set(key: tuple, value: list) -> None:
     _top_cache[key] = value
+
+
+def reset_caches_for_tests() -> None:
+    _list_cache.clear()
+    _top_cache.clear()
+    _user_versions.clear()

@@ -1,0 +1,10 @@
+Покрытие пакета app (по строкам): 100%
+Дата: 2026-05-12
+
+cd homework_fastapi
+python -m pip install -r requirements.txt
+python -m coverage run -m pytest tests
+python -m coverage report -m
+python -m coverage html -d htmlcov
+
+HTML: htmlcov/index.html
