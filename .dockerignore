@@ -1,0 +1,15 @@
+__pycache__
+*.pyc
+*.pyo
+.env
+.git
+.gitignore
+htmlcov
+.pytest_cache
+.coverage
+tasks.db
+*.md
+tests
+locustfile.py
+pytest.ini
+.coveragerc

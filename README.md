@@ -81,3 +81,24 @@ locust -f locustfile.py --host=http://127.0.0.1:8000
 Без UI, например: `locust -f locustfile.py --host=http://127.0.0.1:8000 --headless -u 20 -r 5 -t 30s`
 
 Скрин лога одного прогона: `tests/LOAD_TEST_SAMPLE_OUTPUT.txt`
+
+## Docker
+
+То же приложение, но для ДЗ по контейнерам - через compose. Два сервиса: `web` (FastAPI) и `db` (mysql 8). Файлы: `Dockerfile`, `docker-compose.yml`. Данные базы в volume `mysql_data`.
+
+```bash
+docker compose up --build
+```
+
+mysql обычно поднимается не сразу, секунд 10-15. web ждёт healthcheck в compose, плюс retry на создание таблиц в `app/main.py`.
+
+- http://127.0.0.1:8000/ - страница с задачами
+- http://127.0.0.1:8000/docs - swagger
+
+Без docker всё как раньше - sqlite из `.env`. В compose в `DATABASE_URL` прописан mysql.
+
+Остановить: `docker compose down` (volume не трогает). `docker compose down -v` - удалит данные в volume.
+
+Проверка volume: создать задачу, потом `docker compose rm -sf db && docker compose up -d`, подождать и снова GET `/tasks` - задача должна остаться.
+
+asciinema: https://asciinema.org/a/NeU9CXaQxTFIGP9e

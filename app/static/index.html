@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Manager</title>
+  <link rel="stylesheet" href="/static/style.css?v=3">
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <div>
+        <h1>Task Manager</h1>
+        <p class="sub">fastapi + docker</p>
+      </div>
+      <a class="link-docs" href="/docs">API docs</a>
+    </header>
+
+    <section class="card" id="auth-card">
+      <h2>Вход</h2>
+      <div class="auth-row">
+        <label class="field">
+          <span>логин</span>
+          <input id="username" type="text" autocomplete="username">
+        </label>
+        <label class="field">
+          <span>пароль</span>
+          <input id="password" type="password" autocomplete="current-password">
+        </label>
+      </div>
+      <div class="btn-row">
+        <button class="btn primary" id="login-btn" type="button">войти</button>
+        <button class="btn" id="register-btn" type="button">регистрация</button>
+        <button class="btn danger" id="logout-btn" type="button" hidden>выйти</button>
+      </div>
+      <p class="msg" id="auth-status"></p>
+    </section>
+
+    <div class="layout" id="tasks-block" hidden>
+      <aside class="card">
+        <h2>Новая задача</h2>
+        <form id="task-form">
+          <input type="hidden" id="task-id">
+          <label class="field">
+            <span>заголовок</span>
+            <input id="task-title" required maxlength="255">
+          </label>
+          <label class="field">
+            <span>описание</span>
+            <textarea id="task-description" rows="4"></textarea>
+          </label>
+          <div class="form-grid">
+            <label class="field">
+              <span>статус</span>
+              <select id="task-status">
+                <option value="pending">в ожидании</option>
+                <option value="in_progress">в работе</option>
+                <option value="completed">завершено</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>приоритет</span>
+              <input id="task-priority" type="number" value="0" min="0" max="999">
+            </label>
+          </div>
+          <div class="btn-row">
+            <button class="btn primary" type="submit" id="save-btn">сохранить</button>
+            <button class="btn" type="button" id="cancel-edit-btn" hidden>отмена</button>
+          </div>
+        </form>
+      </aside>
+
+      <main class="card">
+        <div class="list-head">
+          <h2>Задачи <span class="count" id="task-count">0</span></h2>
+          <div class="toolbar">
+            <input id="search-input" type="search" placeholder="поиск...">
+            <select id="sort-by">
+              <option value="created_at">по дате</option>
+              <option value="title">по названию</option>
+              <option value="status">по статусу</option>
+              <option value="priority">по приоритету</option>
+            </select>
+            <select id="sort-order">
+              <option value="desc">убыв.</option>
+              <option value="asc">возр.</option>
+            </select>
+            <button class="btn" id="refresh-btn" type="button">обновить</button>
+          </div>
+        </div>
+        <ul class="tasks" id="tasks-list"></ul>
+      </main>
+    </div>
+  </div>
+
+  <script src="/static/app.js?v=3"></script>
+</body>
+</html>
